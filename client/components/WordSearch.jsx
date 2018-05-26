@@ -2,26 +2,45 @@ import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 
-class App extends React.Component {
+class WordSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputField: ''
+      inputField: '',
+      sentence: '',
     };
+  }
+
+  componentDidMount() {
+    console.log('grabbing sentences')
+
+    $.get('/dict', sentence => {
+      if (sentence.length) {
+        this.setState(
+          {
+            sentence: sentence,
+          },
+        );
+        console.log(this.state.sentence)
+      }
+      console.log(this.state.sentence)
+    });
   }
 
   lookUpWord() {
     // console.log(this.state.inputField)
     $.post('/dict', {word : this.state.inputField}, () => {
-      $.get('/repos', repos => {
-        if (repos.length) {
+      // console.log('GIANT CONSOLE LOG out',repos)
+      $.get('/dict', sentence => {
+        if (sentence.length) {
           this.setState(
             {
-              repos: repos,
+              sentence: sentence,
             },
-            () => console.log(this.state),
           );
+          console.log(this.state.sentence)
         }
+        console.log(this.state.sentence)
       });
     // axios.get('https://od-api.oxforddictionaries.com/api/v1/entries/en/'+this.state.inputField)
       // .then(function(response){
@@ -35,14 +54,25 @@ class App extends React.Component {
     this.setState({
       inputField: event.target.value
     })
+
+    $.get('/dict', sentence => {
+      if (sentence.length) {
+        this.setState(
+          {
+            sentence: sentence,
+          },
+        );
+        console.log(this.state.sentence)
+      }
+      console.log(this.state.sentence)
+    });
   }
 
     render(){
       return (
         <div>
-          {/* &#10004 */}
             <input type="text" onKeyUp={() => this.updateInput(event)}></input>
-            <button onClick={() => this.lookUpWord()}></button>
+            <button onClick={() => this.lookUpWord(this.props.index)}>&#10004;</button>
         </div>
       );
     }
@@ -66,4 +96,4 @@ class App extends React.Component {
   // }
 // }
 
-export default App;
+export default WordSearch;

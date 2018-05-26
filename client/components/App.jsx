@@ -4,9 +4,10 @@ import Definition from './Definition.jsx';
 import WordSearch from './WordSearch.jsx';
 
 const App = () => (
-  <div>
-    Word Search
+    <h1>
+    Sentences Generator for Dummies
     <WordSearch/>
+    </h1>
   </div>
 );
 

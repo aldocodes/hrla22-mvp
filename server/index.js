@@ -13,6 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static(path.join(__dirname, '../static')));
 
+let sentence = [ { text: 'they are happy to see me doing well' },
+{ text: 'Melissa came in looking happy and excited' },
+{ text: 'we\'re just happy that he\'s still alive' } ];
 // app.use('/api', router);
 
 app.post('/dict', (req, res) => {
@@ -23,9 +26,16 @@ app.post('/dict', (req, res) => {
 
     // console.log(data)
     const returnedDefinition = JSON.parse(data)
-    console.log(returnedDefinition.results[0].lexicalEntries[0])
-
+    // console.log(returnedDefinition.results[0].lexicalEntries[0].entries[0].senses[0].examples)
+    // res.send(returnedDefinition.results[0].lexicalEntries[0].entries[0].senses[0].examples)
+    sentence = returnedDefinition.results[0].lexicalEntries[0].entries[0].senses[0].examples
+    console.log(sentence)
   })
 });
+
+app.get('/dict', (req, res) => {
+  console.log('making a get request')
+  return res.send(sentence)
+})
 
 app.listen(PORT, () => console.log('listening port', PORT));
