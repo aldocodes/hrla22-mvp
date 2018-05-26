@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const { wordCtrl } = require('../controllers/index');
+// const router = require('express').Router();
+// const { wordCtrl } = require('../controllers/index');
 
-router.route('/test').get(wordCtrl.get).post(wordCtrl.post);
+// router.route('/dict').get(wordCtrl.get).post(wordCtrl.post);
 
-module.exports.router = router;
+// module.exports.router = router;

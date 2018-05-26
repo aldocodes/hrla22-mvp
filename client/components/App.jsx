@@ -5,7 +5,7 @@ import WordSearch from './WordSearch.jsx';
 
 const App = () => (
   <div>
-    Word Up
+    Word Search
     <WordSearch/>
   </div>
 );
